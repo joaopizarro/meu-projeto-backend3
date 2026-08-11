@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch scr/app.ts"
+    "dev": "tsx watch src/app.ts"
   },
   "repository": {
     "type": "git",
