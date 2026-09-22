@@ -107,4 +107,37 @@ app.listen(PORT, () => {
     console.log("GET /player - Obter informações do jogador");
     console.log("POST /player/attack - Jogador realiza um ataque");
     console.log("POST /player/damage - Jogador recebe dano");
+    console.log("POST /player/heal - Jogador recupera vida");
+    console.log("POST /player/level-up - Jogador sobe de nível");
+});
+// POST
+// Faz o jogador recuperar vida
+app.post("/player/heal", (req: Request, res: Response) => {
+    const { healAmount } = req.body;
+
+    player1.takeHealth(healAmount);
+
+    // Salva o estado atualizado do player
+    savePlayerState(player1);
+
+    res.json({
+        action: "Jogador recuperou vida",
+        currentHealth: player1.health,
+        currentLevel: player1.level,
+    });
+});
+
+// POST
+// Faz o jogador subir de nível
+app.post("/player/level-up", (req: Request, res: Response) => {
+    player1.upLevel();
+
+    // Salva o estado atualizado do player
+    savePlayerState(player1);
+
+    res.json({
+        action: "Jogador subiu de nível",
+        currentHealth: player1.health,
+        currentLevel: player1.level,
+    });
 });
